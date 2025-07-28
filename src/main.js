@@ -1,3 +1,5 @@
+import './styles.css'
+
 // Constants
 const GRID_SIZE = 16;
 const CELL_SIZE = 20; // 16x16 grid, 320x320 canvas
