@@ -35,9 +35,7 @@ const canvasElem = document.getElementById('gameCanvas');
 
 async function initPyodideAndGame() {
   pyodide = await window.loadPyodide();
-  await pyodide.loadPackage('micropip');
-  await pyodide.runPythonAsync(`import sys; sys.path.append('/src')`);
-  await pyodide.runPythonAsync(await (await fetch('/src/game.py')).text());
+  await pyodide.runPythonAsync(await (await fetch('game.py')).text());
   pyStep = pyodide.globals.get('step');
   pyPlaceFood = pyodide.globals.get('place_food');
   // Place initial food

@@ -10,7 +10,6 @@ def place_food(state_json):
     state = json.loads(state_json)
     grid_size = state['grid_size']
     snake = state['snake']
-    
     # Create a set of all possible positions
     all_positions = set()
     for y in range(grid_size):
@@ -41,19 +40,17 @@ def step(state_json):
         return json.dumps(state)
     direction = state['dir']
     snake = list(state['snake'])
-
     # Calculate new head position
     head = {
         'x': snake[0]['x'] + direction['x'],
         'y': snake[0]['y'] + direction['y']
     }
     grid_size = state['grid_size']
-
     # Check wall collision
     if head['x'] < 0 or head['x'] >= grid_size or head['y'] < 0 or head['y'] >= grid_size:
         state['game_over'] = True
         return json.dumps(state)
-
+        
     # Check self collision
     for segment in snake:
         if segment['x'] == head['x'] and segment['y'] == head['y']:
@@ -62,7 +59,6 @@ def step(state_json):
 
     # Move snake
     snake.insert(0, head)  # Add new head
-    
     # Check for food
     food = state.get('food')
     if food and head['x'] == food['x'] and head['y'] == food['y']:
